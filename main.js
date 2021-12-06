@@ -1,5 +1,6 @@
 const bday = document.querySelector("#bday");
 const checkBtn = document.querySelector("#check-btn");
+const output = document.querySelector('#output');
 
 //reverse a string
 function reverseString(str) {
@@ -73,43 +74,95 @@ function isLeapYear(year) {
 
 //get the next day's date
 function getNextDate(date) {
-    var day = date.day + 1;
-    var month = date.month;
-    var year = date.year;
-  
-    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  
-    if (month === 2) {
-      if (isLeapYear(year)) {
-        if (day > 29) {
-          day = 1;
-          month++;
-        }
-      } else {
-        if (day > 28) {
-          day = 1;
-          month++;
-        }
+  var day = date.day + 1;
+  var month = date.month;
+  var year = date.year;
+
+  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (month === 2) {
+    if (isLeapYear(year)) {
+      if (day > 29) {
+        day = 1;
+        month++;
       }
     } else {
-      if (day > daysInMonth[month - 1]) {
+      if (day > 28) {
         day = 1;
         month++;
       }
     }
-  
-    if (month > 12) {
-      month = 1;
-      year++;
+  } else {
+    if (day > daysInMonth[month - 1]) {
+      day = 1;
+      month++;
     }
-  
-    console.log ({
-      day: day,
-      month: month,
-      year: year,
-    });
   }
-  
-var date = { day: 10, month: 9, year: 2020 };
 
-checkBtn.addEventListener("click", getNextDate(date));
+  if (month > 12) {
+    month = 1;
+    year++;
+  }
+
+  return {
+    day: day,
+    month: month,
+    year: year,
+  };
+}
+
+//get next palindrome date
+function getNextPalindromeDate(date) {
+  var nextDate = getNextDate(date);
+  var dayCount = 0;
+
+  while (1) {
+    dayCount++;
+    var dateStr = getDateAsString(nextDate);
+    var resultList = checkPalindrome(dateStr);
+    for (let i = 0; i < resultList.length; i++) {
+      if (resultList[i]) {
+        return [dayCount, nextDate];
+      }
+    }
+    nextDate = getNextDate(nextDate);
+  }
+}
+
+//
+function clickHandler() {
+  var bdayStr = bday.value;
+
+  if (bdayStr !== "") {
+    var date = bdayStr.split("-");
+    var yyyy = date[0];
+    var mm = date[1];
+    var dd = date[2];
+
+    var date = {
+      day: Number(dd),
+      month: Number(mm),
+      year: Number(yyyy),
+    };
+
+    var dateStr = getDateAsString(date);
+    var list = checkPalindrome(dateStr);
+    var isPalindrome = false;
+
+    for (let i = 0; i < list.length; i++) {
+      if (list[i]) {
+        isPalindrome = true;
+        break;
+      }
+    }
+    if (!isPalindrome) {
+      const [dayCount, nextDate] = getNextPalindromeDate(date);
+      output.innerText = `The nearest palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${dayCount} days.`;
+    } else {
+      output.innerText = "Yay! Your birthday is palindrome!";
+    }
+  }
+}
+
+
+checkBtn.addEventListener("click", clickHandler);
