@@ -7,12 +7,17 @@
   background-color: rgb(121, 228, 255);
   font-family: "Fuzzy Bubbles", cursive;
 }
-
+.header{
+    padding-top: 3rem;
+}
+.description{
+    font-size: larger;
+}
 .header,
 .description {
   width: 80%;
   text-align: center;
-  margin: 1rem auto;
+  margin: 2rem auto;
 }
 
 /*page specific css from here*/
