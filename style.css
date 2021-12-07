@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: rgb(121, 228, 255);
+  font-family: "Fuzzy Bubbles", cursive;
+}
+
+.header,
+.description {
+  width: 80%;
+  text-align: center;
+  margin: 1rem auto;
+}
+
+/*page specific css from here*/
+
+label {
+  width: 100%;
+  display: block;
+  margin: 1rem auto;
+  text-align: center;
+  text-decoration: underline;
+  font-size: larger;
+}
+
+#bday {
+  width: 30%;
+  display: block;
+  margin: 1rem auto;
+  padding: 0.3rem;
+  text-align: center;
+  border-radius: 1rem;
+  border-color: orangered;
+}
+
+#check-btn {
+  font-size: large;
+  display: block;
+  margin: auto;
+  padding: 0.2rem 1rem;
+  border-radius: 1rem;
+  border-color: coral;
+}
+
+#output {
+  text-align: center;
+  margin: 1rem auto;
+  font-size: large;
+  background-color: coral;
+}
+
+.angles {
+  text-align: center;
+  border-radius: 1rem;
+  font-size: large;
+}
+/*ends here*/
+
+footer {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: goldenrod;
+  font-size: medium;
+  font-weight: bold;
+}
